@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>foolish</title>
+	<link rel="stylesheet" href="css/foolish.css">
+</head>
+<body>
+	<div id="box">
+		<span id="tishi">提示</span>
+	    <a id="img">?</a>
+	    <div id="text">你是傻逼吗？</div>
+		<input type="button" id="btn0" value="X" />
+		<input type="button" id="btn1" value="是的" />
+		<input type="button" id="btn2" value="不是" />
+		<span href="" id="yes"></span>
+	</div>
+	<div id="opa"></div>
+	<div class="foolish" onclick="window.open('index.html');"><img src="img/hahaha1.png" alt="慎点！"></div>
+</body>
+<script>
+	window.onload = function(){
+		var oBox = document.getElementById('box');
+		var oText = document.getElementById('text');
+		var oBtn0 = document.getElementById('btn0');
+		var oBtn1 = document.getElementById('btn1');
+		var oBtn2 = document.getElementById('btn2');
+		var oYes = document.getElementById('yes');
+		var oImg = document.getElementById('img');
+		var oP = document.getElementById('opa');
+		var oFoolish = document.getElementsByClassName('foolish')[0];
+
+		var timer0 = null;
+		var timer1 = null;
+		var timer2 = null;
+		var timer3 = null;
+
+		oBtn0.onclick = function(){
+			clearInterval(timer0);
+			oText.innerHTML = '你关了就不是傻逼了吗？';
+		}
+
+		oBtn2.onmouseover = function(){
+			oText.innerHTML = '你是傻逼吗？';
+			oBtn2.style.bottom = '80px';
+			setInterval(function(){
+				oBtn2.style.bottom = '20px';
+			},2500);
+		};
+		oBtn2.onmouseout = function(){
+			oYes.disabled = false;
+		};
+		
+		oYes.onmouseover = function(){
+			oBtn2.style.bottom = '20px';
+			oText.innerHTML = '你是傻逼吗？';
+		};
+		oBtn1.onclick = function(){
+			clearInterval(timer0);
+			oBtn1.value = '是的';
+			oText.innerHTML = '我就知道你会选是的！';
+			timer0 = setInterval(function(){
+				oText.innerHTML = '你是傻逼吗？';
+			},2500);
+			oBtn3.value = '不是';
+		};
+		oBtn2.onclick = function(){
+			clearInterval(timer0);
+			oBtn2.value = '是的';
+			oText.innerHTML = '你自己心里清楚就好！';
+			timer0 = setInterval(function(){
+				oText.innerHTML = '你是傻逼吗？';
+			},2000);
+			oBtn1.value = '不是';
+		};
+
+		oImg.onmouseover = function(){
+			clearTimeout(timer1);
+			oText.innerHTML = '你敢点这个？';
+			timer1 = setTimeout(function(){
+				oText.innerHTML = '你倒是点啊，怂包！';
+			},1000);
+		};
+		oImg.onmouseout = function(){
+			clearTimeout(timer1);
+			clearTimeout(timer1);
+			oText.innerHTML = '切！你个辣鸡！';
+			timer1 = setTimeout(function(){
+				oText.innerHTML = '你是傻逼吗？';
+			},2000);
+		};
+		var count = 0;
+		oImg.onclick = function(){
+			clearInterval(timer2);
+			oBox.style.display = 'none';
+			for(var i = 0; i < 3; i++){
+				oP.style.display = 'block';
+				timer2 = setInterval(function(){
+					var r = parseInt(Math.random()*256);
+					var g = parseInt(Math.random()*256);
+					var b = parseInt(Math.random()*256);
+					oP.style.background = 'rgb('+r+','+g+','+b+')';
+				},10);
+				timer3 = setTimeout(function(){
+					oP.innerHTML = '警告！！！';
+					setTimeout(function(){
+						oP.innerHTML = '检测到病毒正在入侵计算机';
+						setTimeout(function(){
+							oP.innerHTML = '请迅速关机！';
+							oFoolish.style.display = 'block';
+						},1500);
+					},1500);
+				},1500);
+			}	
+		};
+	};
+	</script>
+</html>
