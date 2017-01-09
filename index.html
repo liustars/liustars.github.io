@@ -4,171 +4,7 @@
 	<meta charset="UTF-8">
 	<title>liuxing</title>
 	<link rel="stylesheet" href="css/base.css">
-	<style>
-		html {height:100%;}
-		body {
-			position: relative;
-			background-color:#333;
-			background:url(img/bg_stars.jpg) repeat;
-			height:100%;
-			width:100%;
-			overflow: hidden;
-			-webkit-animation: sky 100s linear infinite;
-    		-moz-animation: sky 100s linear infinite;
-    		-ms-animation: sky 100s linear infinite;
-    		-o-animation: sky 100s linear infinite;
-    		animation: sky 100s linear infinite;
-		}
-		@keyframes sky {
-		    50% {
-		        background-position: 640px 0px;
-		    }
-		    100% {
-		        background-position: 1280px 0px;
-		    }
-		}
-		@-moz-keyframes sky {
-		    50% {
-		        background-position: 640px 0px;
-		    }
-		    100% {
-		        background-position: 1280px 0px;
-		    }
-		}
-		@-webkit-keyframes sky {
-		    50% {
-		        background-position: 640px 0px;
-		    }
-		    100% {
-		        background-position: 1280px 0px;
-		    }
-		}
-		.header {
-			width:100%;
-			height:100px;
-			position: relative;
-		}
-		
-		.nav {
-			width:1266px;
-			height:80px;
-			margin:10px auto;
-			border:2px solid #fff;
-			border-radius:10px;
-			position: relative;
-		}
-		.nav li {
-			width:200px;
-			text-align:center;
-			height:76px;
-			line-height:76px;
-			border:2px solid transparent;
-			float:left;
-			cursor:pointer;
-		}
-		.nav li a {
-			font-size:20px;
-			color:#fffbe8;
-		}
-		#border_hover {
-			width:120px;
-			height:48px;
-			border:1px solid #fff;
-			border-radius:10px;
-			position: absolute;
-			left:41px;
-			top:16px;
-		}
-		.box {
-			width:212px;
-			height:300px;
-			position:absolute;
-			left:50px;
-			top:88px;
-		}
-		@-webkit-keyframes rotate{
-		  0% {
-		    -webkit-transform: rotate(30deg);
-		    transform: rotate(30deg);
-		  }
-		  100% {
-		    -webkit-transform: rotate(-30deg);
-		    transform: rotate(-30deg);
-		  }
-		}
-
-		.sp {
-			width:5px;
-			height:200px;
-			position:absolute;
-			left:100px;
-			top:0px;
-			background:rgba(0, 188, 212, 0.22);
-			transform-origin: top;
-		}
-		.origin {
-		    background: #1bcdd0;
-		    border: 2px solid #fff;
-		    border-radius: 50%;
-		    height: 10px;
-		    margin-left: -5px;
-		    margin-top: -5px;
-		    position: absolute;
-		    width: 10px;
-		}
-		.xue {
-			width:100px;
-			height:100px;
-			background:url(img/xuebiao.png);
-			background-size:100% 100%;
-			position: absolute;
-			left:-50px;
-		}
-		#opt {
-			width:100%;
-			height:100%;
-			position: absolute;
-			background:#000;
-			opacity: 0.5;
-			z-index:999;
-		}
-		.fly {
-			width:200px;
-			height:100px;
-			background: url(img/fly.jpg);
-			background-size:100% 100%;
-			position: absolute;
-			left:1165px;
-			top:0;
-			z-index:999;
-		}
-		.img {
-			width:60px;
-			height:80px;
-			position: absolute;
-			left:70px;
-			top:0;
-		}
-		#text {
-			width:145px;
-			height:30px;
-			color:rgba(255,193,7,0.9);
-			font-size:14px;
-			text-align:center;
-			line-height:30px;
-			background:url(img/fly.png);
-			background-size: cover;
-			position: absolute;
-			left:27px;
-			bottom:-30px;
-			animation:flash 5s infinite;
-		}
-		@keyframes flash{
-			0%{opacity: 1}
-			50%{opacity: 0.8}
-			100%{opacity: 0}
-		}
-	</style>
+	<link rel="stylesheet" href="css/index.css">
 </head>
 <body>
 	<div class="header">
@@ -183,19 +19,21 @@
 		</ul>
 	</div>
 	<ul id="snow">
-		<li class="box">
-			<div id="sp">
-				<div id="origin"></div>
-				<div id="xue"></div>
+		<!-- <li class="box">
+			<div class="sp">
+				<div class="origin"></div>
+				<div class="xue"></div>
 			</div>
-		</li>
+		</li> -->
 	</ul>
+	<div class="opt"></div>
 	<div id="opt">
 		<div class="fly">
 			<img src="img/movefly.gif" class="img" />
 			<span id="text">网站开发中,敬请期待！</span>
 		</div>
 	</div>
+	<div class="foolish" onclick="window.open('foolish.html');"><img src="img/hahaha.png" alt="慎点！"></div>
 </body>
 <script src="js/common.js"></script>
 <script src="js/move-end.js"></script>
@@ -227,6 +65,9 @@
 		var oFly = document.getElementsByClassName('fly')[0];
 		var oOPt = document.getElementById('opt');
 		var iNow = 0;
+		var count = 0;
+
+		var oFoolish = document.getElementsByClassName('foolish')[0];
 
 		var posArr = [
 			{left:1165,top:0},
@@ -241,10 +82,20 @@
 		for (var i = 0; i < aLi.length - 1; i++) {
 			aLi[i].index = i;
 			aLi[i].onmouseover = function(){
+				count = this.index;
 				clearInterval(timer);
 				moveNav(oHover,(41 + this.index*aLi[0].offsetWidth));
+				console.log(count);
+				oHover.onclick = function(){
+					if(count == 5){
+						window.open('star/plane.html');
+					}else{
+						alert('网站功能正在努力开发中,先去玩玩游戏吧(GAME)...');
+					}
+				};
 			};
 		}
+		
 
 		for(var i = 0; i < 6; i++){
 			oSnow.innerHTML += '<li class="box"><div class="sp"><div class="origin"></div><div class="xue"></div></div></li>';
@@ -252,7 +103,8 @@
 			var oXue = document.getElementsByClassName('xue');
 			var oSp = document.getElementsByClassName('sp');
 			setStyle(oSp[i],{height:(i+1)*80 + 'px'});
-			oBox[i].style.left = i*(aLi[0].offsetWidth+86) + 50 + 'px';
+			console.log(oSp[i].style.height)
+			oBox[i].style.left = i*(aLi[0].offsetWidth) + 50 + 'px';
 			oXue[i].style.top = oSp[i].offsetHeight - oXue[0].offsetHeight/2  + 'px';
 			oSp[i].style.animation = "rotate 3s infinite alternate ease-in-out";
 			oXue[i].style.animation = "rotate 3s infinite alternate ease-in-out";
